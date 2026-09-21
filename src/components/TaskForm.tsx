@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
-
-export default function TaskForm(props) {
+import { Task, NewTask } from '../types'
+interface TaskFormProps {
+  editingTask: Task | null;
+  addTask: (newTask: NewTask) => void;
+  editTask: (updatedTask: Task) => void;
+}
+export default function TaskForm(props: TaskFormProps) {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [priority, setPriority] = useState("low")
@@ -55,17 +60,18 @@ export default function TaskForm(props) {
             {props.editingTask ? (
                 <button
                     onClick={() => {
-                        const updatedTask = {
-                            id: props.editingTask.id,
-                            title: title,
-                            description: description,
-                            priority: priority,
-                            status: status,
-                            createdAt: props.editingTask.createdAt
-                        }
-
-                        props.editTask(updatedTask)
-                    }}
+    if (props.editingTask) {
+        const updatedTask: Task = {
+            id: props.editingTask.id,
+            title: title,
+            description: description,
+            priority: priority,
+            status: status,
+            createdAt: props.editingTask.createdAt
+        }
+        props.editTask(updatedTask)
+    }
+}}
                 >
                     Edit Task
                 </button>

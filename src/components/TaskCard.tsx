@@ -1,6 +1,12 @@
 import React from 'react'
+import { Task } from '../types'
 
-export default function TaskCard(props) {
+interface TaskCardProps{
+  task:Task,
+  startEdit:(task:Task) => void;
+  deleteTask:(id:number) => void;
+}
+export default function TaskCard(props:TaskCardProps) {
   return (
     <div>
         {props.task.id},

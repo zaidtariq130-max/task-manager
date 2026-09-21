@@ -3,9 +3,9 @@ import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
 import TaskStats from './components/TaskStats'
 import TaskFilters from './components/TaskFilters'
-
+import { Task, NewTask } from './types'
 export default function App() {
-  const [tasks, setTasks] = useState(() => {
+  const [tasks, setTasks] = useState<Task[]>(() => {
   const savedTasks = localStorage.getItem("tasks")
   if (savedTasks) {
     return JSON.parse(savedTasks)
@@ -34,12 +34,12 @@ export default function App() {
   useEffect(() => {
      localStorage.setItem("tasks", JSON.stringify(tasks))
    }, [tasks])
-  const [editingTask, setEditingTask] = useState(null)
+ const [editingTask, setEditingTask] = useState<Task | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [filterStatus, setFilterStatus] = useState("")
   const [filterPriority, setFilterPriority] = useState("")
 
-  function addTask(newTask) {
+  function addTask(newTask: NewTask) { 
     const newId = tasks.length + 1
     const createdAt = new Date().toLocaleString()
 
@@ -51,16 +51,16 @@ export default function App() {
     setTasks([...tasks, taskWithId])
   }
 
-  function editTask(updatedTask) {
+ function editTask(updatedTask: Task) {
     setTasks(tasks.map((t) => (t.id === updatedTask.id ? updatedTask : t)))
     setEditingTask(null)
   }
 
-  function startEdit(task) {
+  function startEdit(task: Task) {
     setEditingTask(task)
   }
 
-  function deleteTask(id) {
+  function deleteTask(id: number) {
     setTasks(tasks.filter((t) => t.id !== id))
   }
 

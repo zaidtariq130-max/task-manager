@@ -1,5 +1,16 @@
 import React from 'react'
-export default function TaskFilters(props) {
+import { Task } from '../types'
+interface TaskFiltersProps{
+  searchTerm: string;
+  setSearchTerm:(value:string) => void;
+  filterStatus: string;
+  setFilterStatus: (value:string) => void;
+  filterPriority:string;
+  setFilterPriority:(value:string)=> void;
+
+
+}
+export default function TaskFilters(props: TaskFiltersProps) {
   return (
     <div>
     <input

@@ -1,6 +1,9 @@
 import React from 'react'
-
-export default function TaskStats(props) {
+import { Task } from '../types'
+interface TaskStatsProp{
+  tasks:Task[];
+}
+export default function TaskStats(props:TaskStatsProp) {
     const totalTasks = props.tasks.length
     const todoTasks = props.tasks.filter((task) => task.status === "Todo").length
     const inProgressTasks = props.tasks.filter((task) => task.status === "In Progress").length
