@@ -9,7 +9,16 @@ interface TaskListProps{
 }
 export default function TaskList(props: TaskListProps) {
   return (
-    <div>
+    <div className="task-list-section">
+      <div>
+        <span>#</span>
+        <span>Title</span>
+        <span>Description</span>
+        <span>Priority</span>
+        <span>Status</span>
+        <span>Created At</span>
+        <span>Actions</span>
+      </div>
     {props.tasks.map((t) =>(
     <TaskCard key={t.id}
     task={t}

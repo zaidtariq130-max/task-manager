@@ -12,7 +12,7 @@ interface TaskFiltersProps{
 }
 export default function TaskFilters(props: TaskFiltersProps) {
   return (
-    <div>
+    <div className="filter-section">
     <input
     type="text"
     placeholder="Search by title"

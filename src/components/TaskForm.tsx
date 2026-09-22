@@ -8,8 +8,8 @@ interface TaskFormProps {
 export default function TaskForm(props: TaskFormProps) {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [priority, setPriority] = useState("low")
-    const [status, setStatus] = useState("todo")
+    const [priority, setPriority] = useState("")
+    const [status, setStatus] = useState("")
 
     useEffect(() => {
         if (props.editingTask) {
@@ -20,45 +20,53 @@ export default function TaskForm(props: TaskFormProps) {
     } else {
         setTitle("")
         setDescription("")
-        setPriority("Low")
-        setStatus("Todo")
+        setPriority("")
+        setStatus("")
     }
     }, [props.editingTask])
 
     return (
-        <div>
+        <div className="form-section">
+            <h1>Task <span>Manager</span></h1>
             <input
                 type="text"
+                placeholder="Enter task title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
 
             <input
                 type="text"
+                placeholder="Enter task description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
 
-            <select
-                value={priority}
-                onChange={(e) => setPriority(e.target.value)}
-            >
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-            </select>
+            <div className="form-grid">
+              <select
+                  value={priority}
+                  onChange={(e) => setPriority(e.target.value)}
+              >
+                  <option value="">Select Priority</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+              </select>
 
-            <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-            >
-                <option>Todo</option>
-                <option>In Progress</option>
-                <option>Completed</option>
-            </select>
+              <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+              >
+                  <option value="">Select Status</option>
+                   <option value="Todo">Todo</option>
+                   <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+              </select>
+            </div>
 
             {props.editingTask ? (
                 <button
+                    className="btn-edit-submit"
                     onClick={() => {
     if (props.editingTask) {
         const updatedTask: Task = {
@@ -77,18 +85,30 @@ export default function TaskForm(props: TaskFormProps) {
                 </button>
             ) : (
                 <button
+                    className="btn-add"
                     onClick={() => {
-                        const newTask = {
-                            title: title,
-                            description: description,
-                            priority: priority,
-                            status: status
-                        }
+  if (!title || !description || !priority || !status) {
+    alert("Please fill all fields")
+    return
+  }
 
-                        props.addTask(newTask)
-                        setTitle("")
-                        setDescription("")
-                    }}
+  const confirmed = window.confirm("Confirm?")
+  if (!confirmed) return
+
+  const newTask = {
+    title,
+    description,
+    priority,
+    status
+  }
+
+  props.addTask(newTask)
+
+  setTitle("")
+  setDescription("")
+  setPriority("")
+  setStatus("")
+}}
                 >
                     Add Task
                 </button>
