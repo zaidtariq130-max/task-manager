@@ -58,9 +58,7 @@ export default function App() {
 
   function editTask(updatedTask: Task) {
     setTasks(
-      tasks.map((t) =>
-        t.id === updatedTask.id ? updatedTask : t
-      )
+      tasks.map((t) => t.id === updatedTask.id ? updatedTask : t )
     )
 
     setEditingTask(null)
@@ -75,57 +73,53 @@ export default function App() {
   }
 
   const filteredTasks = tasks.filter((task) => {
-    const matchesSearch = task.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
+    const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase())
 
-    const matchesStatus =
-      filterStatus === "" ||
-      task.status.toLowerCase() === filterStatus.toLowerCase()
+    const matchesStatus = filterStatus === "" || task.status.toLowerCase() === filterStatus.toLowerCase()
 
-    const matchesPriority =
-      filterPriority === "" ||
-      task.priority.toLowerCase() === filterPriority.toLowerCase()
+    const matchesPriority = filterPriority === "" || task.priority.toLowerCase() === filterPriority.toLowerCase()
 
     return matchesSearch && matchesStatus && matchesPriority
   })
 
   return (
     <BrowserRouter>
-  <Navbar />
+    <Navbar />
 
-  <Routes>
-    <Route
-      path="/"
-      element={
-        <Home
-          editingTask={editingTask}
-          addTask={addTask}
-          editTask={editTask}
+    <div className="page-container">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              editingTask={editingTask}
+              addTask={addTask}
+              editTask={editTask}
+            />
+          }
         />
-      }
-    />
 
-    <Route
-  path="/list"
-  element={
-    <TaskListPage
-      tasks={filteredTasks}
-      editingTask={editingTask}
-      addTask={addTask}
-      editTask={editTask}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-      filterStatus={filterStatus}
-      setFilterStatus={setFilterStatus}
-      filterPriority={filterPriority}
-      setFilterPriority={setFilterPriority}
-      startEdit={startEdit}
-      deleteTask={deleteTask}
-    />
-      }
-    />
-  </Routes>
-</BrowserRouter>
+        <Route
+          path="/list"
+          element={
+            <TaskListPage
+              tasks={filteredTasks}
+              editingTask={editingTask}
+              addTask={addTask}
+              editTask={editTask}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              filterStatus={filterStatus}
+              setFilterStatus={setFilterStatus}
+              filterPriority={filterPriority}
+              setFilterPriority={setFilterPriority}
+              startEdit={startEdit}
+              deleteTask={deleteTask}
+            />
+          }
+        />
+      </Routes>
+    </div>
+  </BrowserRouter>
   )
 }

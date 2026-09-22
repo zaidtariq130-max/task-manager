@@ -26,8 +26,8 @@ export default function TaskForm(props: TaskFormProps) {
     }, [props.editingTask])
 
     return (
-        <div className="form-section">
-            <h1>Task <span>Manager</span></h1>
+        <div>
+            <h1 className='header-txt'>Add Task Here</h1>
             <input
                 type="text"
                 placeholder="Enter task title"
@@ -42,31 +42,28 @@ export default function TaskForm(props: TaskFormProps) {
                 onChange={(e) => setDescription(e.target.value)}
             />
 
-            <div className="form-grid">
-              <select
-                  value={priority}
-                  onChange={(e) => setPriority(e.target.value)}
-              >
-                  <option value="">Select Priority</option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
-              </select>
+            <select
+                value={priority}
+                onChange={(e) => setPriority(e.target.value)}
+            >
+                <option value="">Select Priority</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
 
-              <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-              >
-                  <option value="">Select Status</option>
-                   <option value="Todo">Todo</option>
-                   <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-              </select>
-            </div>
+            <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+            >
+                <option value="">Select Status</option>
+                 <option value="Todo">Todo</option>
+                 <option value="In Progress">In Progress</option>
+                  <option value="Completed">Completed</option>
+            </select>
 
             {props.editingTask ? (
                 <button
-                    className="btn-edit-submit"
                     onClick={() => {
     if (props.editingTask) {
         const updatedTask: Task = {
@@ -84,16 +81,12 @@ export default function TaskForm(props: TaskFormProps) {
                     Edit Task
                 </button>
             ) : (
-                <button
-                    className="btn-add"
+                <button className="btn-add"
                     onClick={() => {
   if (!title || !description || !priority || !status) {
     alert("Please fill all fields")
     return
   }
-
-  const confirmed = window.confirm("Confirm?")
-  if (!confirmed) return
 
   const newTask = {
     title,

@@ -12,7 +12,8 @@ interface TaskFiltersProps{
 }
 export default function TaskFilters(props: TaskFiltersProps) {
   return (
-    <div className="filter-section">
+    <div>
+      <h1 className='header-txt'>Tasks Here</h1>
     <input
     type="text"
     placeholder="Search by title"

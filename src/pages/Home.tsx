@@ -10,7 +10,7 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
   return (
-    <div className="page-wrapper">
+    <div>
       <TaskForm
         addTask={props.addTask}
         editingTask={props.editingTask}

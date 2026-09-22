@@ -21,9 +21,7 @@ interface TaskListPageProps {
 
 export default function TaskListPage(props: TaskListPageProps) {
   return (
-    <div className="page-wrapper">
-      <h1>My <span>Tasks</span></h1>
-
+    <div>
       {props.editingTask && (
         <TaskForm
           editingTask={props.editingTask}
@@ -31,8 +29,6 @@ export default function TaskListPage(props: TaskListPageProps) {
           editTask={props.editTask}
         />
       )}
-
-      <TaskStats tasks={props.tasks} />
 
       <TaskFilters
         searchTerm={props.searchTerm}
@@ -48,6 +44,8 @@ export default function TaskListPage(props: TaskListPageProps) {
         startEdit={props.startEdit}
         deleteTask={props.deleteTask}
       />
+
+      <TaskStats tasks={props.tasks} />
     </div>
   )
 }

@@ -10,9 +10,10 @@ export default function TaskStats(props:TaskStatsProp) {
     const completedTasks = props.tasks.filter((task) => task.status === "Completed").length
     
   return (
-    <div className="stats-section">
+    <div>
         <h2>Task Stats</h2>
-        <p>Total: {totalTasks}</p>
+
+        <p>Total Tasks: {totalTasks}</p>
         <p>Todo: {todoTasks}</p>
         <p>In Progress: {inProgressTasks}</p>
         <p>Completed: {completedTasks}</p>
